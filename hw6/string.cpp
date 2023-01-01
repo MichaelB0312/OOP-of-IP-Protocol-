@@ -75,42 +75,37 @@ bool String::equals(const char *rhs) const {
 
 void String::split(const char* delimiters, String** output, size_t* size) const {
 	
+	// Make a copy of the delimiter string
+	size_t delimiters_length = strlen(delimiters);
+	char delimiters_copy[delimiters_length + 1];
+	strcpy(delimiters_copy, delimiters);
+
+	// Replace the first delimiter character with a null character
+	delimiters_copy[0] = '\0';
+
+	// Count the number of substrings
+	char* token = std::strtok(data, delimiters_copy);
 	*size = 0;
-
-	char* original_str = this->data;
-	char* partial_str = new char[this->length];
-	output = new String*[strlen(delimiters)+1];//+1 for the last delimiter till the end
-	int j = 0;
-	for (int i = 0; i < strlen(delimiters); i++) {
-
-		while ((j < this->length) && (strcmp(delimiters[i], original_str[j]) != 0)) {
-			char ch = original_str[j];
-			strncat(partial_str, &ch, 1);
-			j++;
-		}
-		output[i] = partial_str;
-		delete partial_str;
-		/*missmatch, output is set to NULL, release memory*/
-		if (i == 0 && j == this->length) {
-			delete[] output;
-			exit(1);
-		}
-		*size = (*size) + 1;
-		partial_str = new char[(this->length) - j]
-		
+	while (token != nullptr) {
+		++(*size);
+		token = std::strtok(nullptr, delimiters_copy);
 	}
 
-	delete partial_str;
-	partial_str = new char[(this->length) - j]
-	//allocate last sub-string:
-	while (j < this->length) {
-		char ch = original_str[j];
-		strncat(partial_str, &ch, 1);
-		j++;
+	// Allocate memory for the output array if requested
+	if (output != nullptr) {
+		*output = new String[*size];
 	}
-	output[strlen(delimiters) + 1] = partial_str;
-	*size = (*size) + 1;
-	delete partial_str;
+
+	// Populate the output array with the substrings
+	token = std::strtok(data, delimiters_copy);
+	size_t i = 0;
+	while (token != nullptr) {
+		if (output != nullptr) {
+			(*output)[i] = String(token);
+		}
+		++i;
+		token = std::strtok(nullptr, delimiters_copy);
+	}
 
 	
 }
