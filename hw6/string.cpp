@@ -75,13 +75,13 @@ bool String::equals(const char *rhs) const {
 
 void String::split(const char* delimiters, String** output, size_t* size) const {
 	
-	*size = 0;
+	// Make a copy of the delimiter string
+	size_t delimiters_length = strlen(delimiters);
+	char delimiters_copy[delimiters_length + 1];
+	strcpy(delimiters_copy, delimiters);
 
-	char* original_str = this->data;
-	char* partial_str = new char[this->length];
-	output = new String*[strlen(delimiters)+1];//+1 for the last delimiter till the end
-	int j = 0;
-	for (int i = 0; i < strlen(delimiters); i++) {
+	// Replace the first delimiter character with a null character
+	delimiters_copy[0] = '\0';
 
 		while ((j < this->length) && (strcmp(delimiters[i], original_str[j]) != 0)) {
 			char ch = original_str[j];
@@ -107,10 +107,29 @@ void String::split(const char* delimiters, String** output, size_t* size) const 
 		char ch = original_str[j];
 		strncat(partial_str, &ch, 1);
 		j++;
+	// Count the number of substrings
+	char* token = std::strtok(data, delimiters_copy);
+	*size = 0;
+	while (token != nullptr) {
+		++(*size);
+		token = std::strtok(nullptr, delimiters_copy);
 	}
-	output[strlen(delimiters) + 1] = partial_str;
-	*size = (*size) + 1;
-	delete partial_str;
+
+	// Allocate memory for the output array if requested
+	if (output != nullptr) {
+		*output = new String[*size];
+	}
+
+	// Populate the output array with the substrings
+	token = std::strtok(data, delimiters_copy);
+	size_t i = 0;
+	while (token != nullptr) {
+		if (output != nullptr) {
+			(*output)[i] = String(token);
+		}
+		++i;
+		token = std::strtok(nullptr, delimiters_copy);
+	}
 
 	
 }
