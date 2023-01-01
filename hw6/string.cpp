@@ -4,7 +4,7 @@ using namespace std;
 #include <string.h>
 
 String::String() {
-	data = '\0';
+	strcpy(data,"");
 	length = 0;
 }
 
@@ -65,7 +65,7 @@ bool String::equals(const char *rhs) const {
 	if (!strcmp(this->data, rhs)) {
 		cond1 = 1;
 	}
-	if (this->length == strlen(rhs) {
+	if (this->length == strlen(rhs)) {
 		cond2 = 1;
 	}
 	return cond1 && cond2;
@@ -96,12 +96,12 @@ void String::split(const char* delimiters, String** output, size_t* size) const 
 			exit(1);
 		}
 		*size = (*size) + 1;
-		partial_str = new char[(this->length) - j]
+		partial_str = new char[(this->length) - j];
 		
 	}
 
 	delete partial_str;
-	partial_str = new char[(this->length) - j]
+	partial_str = new char[(this->length) - j];
 	//allocate last sub-string:
 	while (j < this->length) {
 		char ch = original_str[j];
