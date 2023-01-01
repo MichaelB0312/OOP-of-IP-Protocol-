@@ -83,30 +83,6 @@ void String::split(const char* delimiters, String** output, size_t* size) const 
 	// Replace the first delimiter character with a null character
 	delimiters_copy[0] = '\0';
 
-		while ((j < this->length) && (strcmp(delimiters[i], original_str[j]) != 0)) {
-			char ch = original_str[j];
-			strncat(partial_str, &ch, 1);
-			j++;
-		}
-		output[i] = partial_str;
-		delete partial_str;
-		/*missmatch, output is set to NULL, release memory*/
-		if (i == 0 && j == this->length) {
-			delete[] output;
-			exit(1);
-		}
-		*size = (*size) + 1;
-		partial_str = new char[(this->length) - j];
-		
-	}
-
-	delete partial_str;
-	partial_str = new char[(this->length) - j];
-	//allocate last sub-string:
-	while (j < this->length) {
-		char ch = original_str[j];
-		strncat(partial_str, &ch, 1);
-		j++;
 	// Count the number of substrings
 	char* token = std::strtok(data, delimiters_copy);
 	*size = 0;
