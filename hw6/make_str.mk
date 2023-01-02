@@ -13,8 +13,11 @@ $(EXEC): $(OBJS)
 # Ineternal Dependencies
 
 main_str.o: main_str.cpp string.h
+	$(CC) $(CFLAGS) -c main_str.cpp
 
 string.o: string.cpp string.h
+	$(CC) $(CFLAGS) -c string.cpp
+
 
 clean:
 	$(RM) *.o *.exe
