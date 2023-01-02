@@ -4,7 +4,8 @@ using namespace std;
 #include <string.h>
 
 String::String() {
-	strcpy(data,"");
+	data = new char[1];
+	data[0] = '\0';
 	length = 0;
 }
 
@@ -84,11 +85,11 @@ void String::split(const char* delimiters, String** output, size_t* size) const 
 	delimiters_copy[0] = '\0';
 
 	// Count the number of substrings
-	char* token = std::strtok(data, delimiters_copy);
+	char* token = strtok(data, delimiters_copy);
 	*size = 0;
 	while (token != nullptr) {
 		++(*size);
-		token = std::strtok(nullptr, delimiters_copy);
+		token = strtok(nullptr, delimiters_copy);
 	}
 
 	// Allocate memory for the output array if requested
@@ -97,14 +98,14 @@ void String::split(const char* delimiters, String** output, size_t* size) const 
 	}
 
 	// Populate the output array with the substrings
-	token = std::strtok(data, delimiters_copy);
+	token = strtok(data, delimiters_copy);
 	size_t i = 0;
 	while (token != nullptr) {
 		if (output != nullptr) {
 			(*output)[i] = String(token);
 		}
 		++i;
-		token = std::strtok(nullptr, delimiters_copy);
+		token = strtok(nullptr, delimiters_copy);
 	}
 
 	
@@ -119,7 +120,8 @@ int String::to_integer() const {
 
 String String::trim() const {
 
-	String copy_str = this;
+	String copy_str;
+	strcpy(copy_str.data,this->data);
 	char *tmp = copy_str.data;
 	/*remove the prefix whitespace*/
 	int flag = 1;
@@ -131,11 +133,11 @@ String String::trim() const {
 		flag = 0;
 		curr_len++;
 		//printf("%c\n",*s);
-	} while (*copy_str.data++ = *tmp++);
+	} while ((*copy_str.data++ = *tmp++));
 
 	/*remove the suffix whitespace*/
 	copy_str.length = curr_len - 1;
-	char *tmp = copy_str.data + copy_str.length - 1;
+	tmp = copy_str.data + copy_str.length - 1;
 	int end_loc = copy_str.length - 1;
 	//printf("%c\n",*(d-7));
 	while (*tmp == ' ') {
@@ -145,6 +147,7 @@ String String::trim() const {
 	}
 
 	copy_str.data[end_loc + 1] = '\0';
+	copy_str.length = end_loc;
 
 	return copy_str;
 }
