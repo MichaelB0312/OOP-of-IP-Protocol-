@@ -74,7 +74,7 @@ bool String::equals(const char *rhs) const {
 }
 
 
-void String::split(const char* delimiters, String** output, size_t* size) const {
+/*void String::split(const char* delimiters, String** output, size_t* size) const {
 	
 	// Make a copy of the delimiter string
 	size_t delimiters_length = strlen(delimiters);
@@ -109,8 +109,64 @@ void String::split(const char* delimiters, String** output, size_t* size) const 
 	}
 
 	
-}
+}*/
 
+void String::split(const char* delimiters, String** output, size_t* size) const {
+	// Initialize the output array and size variable
+	*size = 0;
+	//*output = NULL;
+
+	// Check if the input string is empty
+	if (length == 0) {
+		return;
+	}
+
+	// Calculate the length of the delimiters string
+	size_t delimiters_length = strlen(delimiters);
+
+	// Start and end indices for the current substring
+	size_t start = 0, end = 0;
+
+	// Allocate initial memory for the output array
+	*size = delimiters_length;
+	//*output = new String[*size + 1 ]; //+1 for the last delimiter till the end
+	size_t i = 0;
+
+	// Iterate through the delimiters
+	for (size_t j = 0; j < delimiters_length; j++) {
+		// Check if the current character is a delimiter
+		bool is_delimiter = false;
+
+		while (i < length) {
+			if (data[i] == delimiters[j]) {
+				is_delimiter = true;
+				break;
+			}
+			i++;
+		}
+
+		// If the current character is a delimiter, split the string
+		if (is_delimiter) {
+			end = i;
+			char* substring = new char[(end - start) + 1];
+			strncpy(substring, data + start,end-start);
+			output[j] = new String(substring);
+			start = i + 1;
+			i = i + 1;
+			delete[] substring;
+			
+		}
+	}
+
+	// Add the final substring to the list
+	end = length;
+	char* substring = new char[(end - start) + 1];
+	strncpy(substring, data + start, end - start);
+	output[delimiters_length] = new String(substring);
+	delete[] substring;
+	
+
+}
 
 int String::to_integer() const {
 
