@@ -12,7 +12,12 @@ int main(){
 	//String str(c);
 	//str = c;
 	String str5("   Yallla Hapoell!!  ");
-	String str6 = str5.trim();
+	//const char* delimiters = "aHl";
+	String *output;
+	size_t size;
+	str5.split("aHl",&output,&size);
+	delete[] output;
+	//String str6 = str5.trim();
 	int bool1 = str5.equals("   fuck maccabi");
 	cout << bool1;
 
