@@ -111,10 +111,10 @@ bool String::equals(const char *rhs) const {
 	
 }*/
 
-void String::split(const char* delimiters, String** output, size_t* size) const {
+/*void String::split(const char* delimiters, String** output, size_t* size) const {
 	// Initialize the output array and size variable
 	*size = 0;
-	//*output = NULL;
+	////output = NULL;
 
 	// Check if the input string is empty
 	if (length == 0) {
@@ -129,7 +129,7 @@ void String::split(const char* delimiters, String** output, size_t* size) const 
 
 	// Allocate initial memory for the output array
 	*size = delimiters_length;
-	//*output = new String[*size + 1 ]; //+1 for the last delimiter till the end
+	*output = new String[*size + 1 ]; //+1 for the last delimiter till the end
 	size_t i = 0;
 
 	// Iterate through the delimiters
@@ -166,7 +166,74 @@ void String::split(const char* delimiters, String** output, size_t* size) const 
 	delete[] substring;
 	
 
+}*/
+
+/*void String::split(const char* delimiters, String** output, size_t* size) const {
+  // Make a copy of the string and a copy of the delimiters
+  char *str = strdup(data);
+  char *delims = strdup(delimiters);
+
+  // Initialize the output array and the size
+  *size = 0;
+  *output = new String[strlen(delimiters) + 1];
+
+  // Tokenize the string
+  char *token = strtok(str, delims);
+  while (token != NULL) {
+    // Initialize the new token
+    (*output)[*size] = token;
+    (*size)++;
+
+    // Get the next token
+    token = strtok(NULL, delims);
+  }
+
+  // Free the copies of the string and delimiters
+  free(str);
+  free(delims);
+}*/
+
+void String::split(const char* delimiters, String** output, size_t* size) const {
+  // Make a copy of the string and a copy of the delimiters
+  char *str = strdup(data);
+  char *delims = strdup(delimiters);
+
+  // Initialize the output array and the size
+  *size = 0;
+  *output = NULL;
+
+  // Tokenize the string
+  char *token = strtok(str, delims);
+  while (token != NULL) {
+    // Allocate memory for the new token
+    if (*output == NULL) {
+      *output = new String[1];
+    } else {
+    	String *new_output = new String[*size + 1];
+
+	// reallocating:
+	for(size_t i=0; i<*size;i++){
+		new_output[i] = (*output)[i];
+	}
+
+	// delete the old array and update new
+	delete[] *output;
+	*output = new_output;
+    }
+
+    // Initialize the new token
+    (*output)[*size] = token;
+    (*size)++;
+
+    // Get the next token
+    token = strtok(NULL, delims);
+  }
+
+  // Free the copies of the string and delimiters
+  free(str);
+  free(delims);
 }
+
 
 int String::to_integer() const {
 
@@ -174,12 +241,12 @@ int String::to_integer() const {
 }
 
 
-String String::trim() const {
+/*String String::trim() const {
 
 	String copy_str;
 	strcpy(copy_str.data,this->data);
 	char *tmp = copy_str.data;
-	/*remove the prefix whitespace*/
+	//remove the prefix whitespace
 	int flag = 1;
 	int curr_len = 0;
 	do {
@@ -191,7 +258,7 @@ String String::trim() const {
 		//printf("%c\n",*s);
 	} while ((*copy_str.data++ = *tmp++));
 
-	/*remove the suffix whitespace*/
+	//remove the suffix whitespace/
 	copy_str.length = curr_len - 1;
 	tmp = copy_str.data + copy_str.length - 1;
 	int end_loc = copy_str.length - 1;
@@ -206,4 +273,33 @@ String String::trim() const {
 	copy_str.length = end_loc;
 
 	return copy_str;
+}*/
+
+String String::trim() const {
+  // Find the first non-whitespace character
+  size_t start = 0;
+  //String cpy_str;
+  //strcpy(cpy_str.data,this->data);
+  //char *copy_str = cpy_str.data;
+	 
+  while (start < length && data[start] == ' ') {
+    start++;
+  }
+
+  // Find the last non-whitespace character
+  size_t end = length - 1;
+  while (end > start && data[end] == ' ') {
+    end--;
+  }
+
+  //delete[] cpy_str;
+
+  // Create a new string and copy the relevant part of the original string to it
+  char *cpy_str = new char[end - start + 2];
+  memcpy(cpy_str, data + start, end - start + 1);
+  cpy_str[end - start + 1] = '\0';
+  String result(cpy_str);
+  delete[] cpy_str;
+  return result;
 }
+
