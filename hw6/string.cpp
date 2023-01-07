@@ -208,18 +208,19 @@ void String::split(const char* delimiters, String** output, size_t* size) const 
     // Allocate memory for the new token
     if (*output == NULL) {
       *output = new String[1];
-    } else {
-    	String *new_output = new String[*size + 1];
-
-	// reallocating:
-	for(size_t i=0; i<*size;i++){
-		new_output[i] = (*output)[i];
 	}
+	else {
+		String* new_output = new String[*size + 1];
 
-	// delete the old array and update new
-	delete[] *output;
-	*output = new_output;
-    }
+		// reallocating:
+		for (size_t i = 0; i < *size; i++) {
+			new_output[i] = (*output)[i];
+		}
+
+		// delete the old array and update new
+		delete[] * output;
+		*output = new_output;
+	}
 
     // Initialize the new token
     (*output)[*size] = token;
