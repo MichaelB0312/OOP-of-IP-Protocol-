@@ -64,15 +64,21 @@ bool IP::set_value(String value) {
 
 	//if(this->ip_to_int(char a,b,c,d)
 
+	unsigned int mask = get_mask(value);
+	
+	//what 
+
+
+
 }
 
 
 bool IP::match(String packet) {
 
-	//first, split the packet according to "," 
+	//get the law -> and split("/") in order to get the m (length of the mask)
 
-
-	if (this->set_value(String value)) {
+	
+	if (this->set_value(law)) {
 
 	}
 }
@@ -106,9 +112,9 @@ unsigned int IP::get_mask(String law) {
 	delete[] out_str;
 
 	// create the mask
-	unsigned int out = 0;
-	out = -1;
-	out = out << (32 - m);
+	unsigned int mask = 0;
+	mask = -1;
+	mask = mask << (32 - m);
 
-	return out;
+	return mask;
 }
