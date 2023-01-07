@@ -205,6 +205,10 @@ void String::split(const char* delimiters, String** output, size_t* size) const 
   // Tokenize the string
   char *token = strtok(str, delims);
   while (token != NULL) {
+
+    if(this->equals(token)){
+	break;
+    }
     // Allocate memory for the new token
     if (*output == NULL) {
       *output = new String[1];
@@ -235,6 +239,38 @@ void String::split(const char* delimiters, String** output, size_t* size) const 
   free(delims);
 }
 
+/*
+void String::split(const char *delimiters, String **output, size_t *size) const {
+  // Make a copy of the original string
+  char *str = strcpy(new char[length + 1], data);
+
+  // Split the string into tokens
+  char *token = strtok(str, delimiters);
+  *size = 0;
+  while (token != NULL) {
+    (*size)++;
+    token = strtok(NULL, delimiters);
+  }
+
+  // Allocate memory for the output array
+  *output = NULL;
+  if (*size > 0) {
+    *output = new String[*size];
+
+    // Split the string again and copy the tokens to the output array
+    size_t i = 0;
+    token = strtok(str, delimiters);
+    while (token != NULL) {
+      (*output)[i] = String(token);
+      i++;
+      token = strtok(NULL, delimiters);
+    }
+  }
+
+  // Free the copy of the original string
+  delete[] str;
+}
+*/
 
 int String::to_integer() const {
 
