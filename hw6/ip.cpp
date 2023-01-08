@@ -66,7 +66,13 @@ bool IP::set_value(String value) {
 
 	unsigned int mask = get_mask(value);
 	
-	//what 
+	//now, we'll get the IP of the law (left to "/")
+	String cpy_value = value;
+	String* equ_out;
+	size_t equ_size;
+
+	cpy.split("=",&equ_out,&equ)
+	
 
 
 
@@ -105,9 +111,10 @@ unsigned int IP::ip_to_int(String ip) {
 unsigned int IP::get_mask(String law) {
 
 	//extarct the length of mask
+	String cpy_law = law;
 	size_t size;
 	String* out_str;
-	law.split("/", &out_str, size);
+	cpy_law.split("/", &out_str, size);
 	int m = out_str[1].to_integer();
 	delete[] out_str;
 

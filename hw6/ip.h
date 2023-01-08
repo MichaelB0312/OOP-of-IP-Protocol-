@@ -7,18 +7,20 @@
 
 class IP : public GenericField {
 
-	String ip;
+	String ip_law;  // required ip of the law, i.e. left to the '/'
 	String law;
 	String field; //src or dst
 
 public:
 
-
+	/**
+	 * @brief get an extern packet from the user. Checks whether it obeys the law.
+	 */
 	bool match(String packet);
 
 	/**
-	 * @brief Get a single law -> extract the set of valid values
-	 * @param[value] Its a single law
+	 * @brief Get a single law -> Initiate/Parsing the ip_law.
+	 * @returns TRUE if parsing process is done without errors
 	 */
 	bool set_value(String value);
 
@@ -35,7 +37,7 @@ public:
 	/**
 	* @brief split the packet according to bytes and convert the packet to unsigned int
 	*/
-	unsigned int ip_to_int(String ip);
+	unsigned int ip_to_int(String ext_ip);
 
 	/**
 	* @brief create a mask according to a given law
