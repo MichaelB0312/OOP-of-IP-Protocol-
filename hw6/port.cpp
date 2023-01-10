@@ -2,7 +2,7 @@
 using namespace std;
 #include <string.h>
 #include "port.h"
-
+#define CORRECT_SIZE 2
 
 Port::Port(string law) {
 	field = find_field(string law);
@@ -18,7 +18,7 @@ String Port::find_field(String law) {
 
 	String* src_out;
 	size_t src_size;
-	string tmp_law
+	String tmp_law
 	law.split("src-port", &src_out, &src_size);
 	if (src_out[0].trim().data[0] == '=') {
 		delete[] src_out;
@@ -37,7 +37,7 @@ bool Port::set_value(string range) {
 	size_t size;
 	//splitting range string "prt-prt"
 	range.split("-",&splitted_range, &size)
-	if (size != 2) {
+	if (size != CORRECT_SIZE) {
 		delete[] splitted_range;
 		return false;
 	}
@@ -55,7 +55,7 @@ bool Port::match(string packet) {
 	//1. divide to fields
 	String* out_fields;
 	size_t size_fields;
-	string tmp_packet = packet.trim();
+	String tmp_packet = packet.trim();
 	tmp_packet.split(",", &out_fields, &size_fields);
 
 	//2. divide each field according to '='
