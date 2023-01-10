@@ -22,3 +22,4 @@ public:
 	bool match(string packet); // checks if the correct field matches the given law
 
 };
+#endif
