@@ -7,7 +7,7 @@
 
 class Port : public GenericField {
 
-	string field; //src or dest
+	String field; //src or dest
 	int port;
 	int upper_bound;
 	int lower_bound;
@@ -15,11 +15,11 @@ class Port : public GenericField {
 
 public:
 
-	Port(string law); //construct a Port object with default values
+	Port(String law); //construct a Port object with default values
 	~Port(); // destructor
 	String find_field(String law); //find the required field dst or src
 	bool set_value(String range); // set the legal values of the range
-	bool match(string packet); // checks if the correct field matches the given law
+	bool match(String packet); // checks if the correct field matches the given law
 
 };
 #endif
