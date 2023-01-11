@@ -13,13 +13,13 @@ $(EXEC): main.o
 
 #create our library of libfirewall
 libfirewall.so: $(OBJS) 
-	$(CXXLINK) -shared $(OBJS) -o libfirewall.so  
+	$(CXXLINK) -shared $(OBJS) -o libfirewall.so -L  
 
 
 #contents of firewall(generic field.h is implictly used in ip.h, port.h
 
 main.o: main.cpp input.h ip.h port.h generic-field.h string.h
-	$(CXX) $(CXXFLAGS) -c ip.cpp
+	$(CXX) $(CXXFLAGS) -c -fpic main.cpp
 
 ip.o: ip.cpp ip.h generic-field.h
 	$(CXX) $(CXXFLAGS) -c -fpic ip.cpp
