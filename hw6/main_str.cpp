@@ -12,7 +12,7 @@ int main(){
 	//c = "  I Love Hapoel   ";
 	//String str(c);
 	//str = c;
-	//String packet("96.48.24.8");
+	String packettt = "96.48.24.8";
 	//const char* delimiters = ".";
 	//String *output;
 	//size_t size;
