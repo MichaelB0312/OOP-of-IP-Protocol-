@@ -11,10 +11,10 @@ using namespace std;
 
 int main(int argc, char** argv) {
 	
-	if (args_check(argc, *argv)) {
+	if (check_args(argc,argv)) {
 		return ERROR;
 	}
-	GenericField field*
+	GenericField *field;
 	String law(argv[1]);
 	String * splitted_law;
 	size_t size;
@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
 	}
 	//checking if this is a port/ip law
 	if (splitted_law[0].trim().equals("src-ip") || splitted_law[0].trim().equals("dst-ip")) {
-		field = new Ip(law);
+		field = new IP(law);
 	}
 	else if (splitted_law[0].trim().equals("src-port") || splitted_law[0].trim().equals("dst-port")) {
 		field = new Port(law);
