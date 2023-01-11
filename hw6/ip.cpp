@@ -20,8 +20,7 @@ IP::IP(String packet, String law) {
 	for (size_t i = 0; i < size_fields; i++) {
 
 		out_fields[i] = out_fields[i].trim();
-		String* tmp_out;
-		size_t tmp_size;
+		String* tmp_out; size_t tmp_size;
 		out_fields[i].split("=", &tmp_out, &tmp_size);
 		
 		//3.identify the corret ip according to field
