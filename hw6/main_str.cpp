@@ -12,7 +12,9 @@ int main(){
 	//c = "  I Love Hapoel   ";
 	//String str(c);
 	//str = c;
-	String packettt = "96.48.24.8";
+	String lawwww = "src-ip=96.48.24.8/8";
+	size_t size;
+	lawwww.split("=",NULL,&size);
 	//const char* delimiters = ".";
 	//String *output;
 	//size_t size;
