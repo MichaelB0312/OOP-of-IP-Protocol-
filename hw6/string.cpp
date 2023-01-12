@@ -200,34 +200,38 @@ void String::split(const char* delimiters, String** output, size_t* size) const 
 
   // Initialize the output array and the size
   *size = 0;
-  *output = NULL;
+  //*output = NULL;
 
   // Tokenize the string
   char *token = strtok(str, delims);
   while (token != NULL) {
 
     if(this->equals(token)){
-	break;
+		break;
     }
+
     // Allocate memory for the new token
-    if (*output == NULL) {
+    if (*size == 0 && output != NULL) {
       *output = new String[1];
 	}
-	else {
-		String* new_output = new String[*size + 1];
+	else if(output != NULL) {
+			String* new_output = new String[*size + 1];
 
-		// reallocating:
-		for (size_t i = 0; i < *size; i++) {
-			new_output[i] = (*output)[i];
-		}
+			// reallocating:
+			for (size_t i = 0; i < *size; i++) {
+				new_output[i] = (*output)[i];
+			}
 
-		// delete the old array and update new
-		delete[] * output;
-		*output = new_output;
+			// delete the old array and update new
+			delete[] * output;
+			*output = new_output;
+
 	}
 
-    // Initialize the new token
-    (*output)[*size] = token;
+	if(output != NULL){
+		// Initialize the new token
+    		(*output)[*size] = token;
+	}
     (*size)++;
 
     // Get the next token
