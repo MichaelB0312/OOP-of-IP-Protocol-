@@ -27,7 +27,7 @@ public:
 	/**
 	 * @brief Initiates a IP from a given packet and required-law
 	 */
-	IP(String packet, String law);
+	IP(String law);
 
 	/**
 	 * @brief find the required field dst or src

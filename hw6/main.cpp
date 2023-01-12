@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
 	size_t size;
 	String law_tmp(law);
 	law_tmp.split("=", &splitted_law, &size);
-	if (size = !CORRECT_SIZE) {
+	if (size != CORRECT_SIZE) {
 		return ERROR;
 	}
 	//checking if this is a port/ip law
@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
 	else if (splitted_law[0].trim().equals("src-port") || splitted_law[0].trim().equals("dst-port")) {
 		field = new Port(law);
 		//initializing port field
-		if ((field.set_value(splitted_law[1].trim()))!) {
+		if (!(field->set_value(splitted_law[1].trim()))) {
 			delete[] splitted_law;
 			return ERROR;
 		}
@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
 		return ERROR;
 	}
 
-	parse_input(&field);
+	parse_input(*field);
 	delete[] splitted_law;
 	delete field;
 	return 0;
