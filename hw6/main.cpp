@@ -15,6 +15,7 @@ int main(int argc, char** argv) {
 		return ERROR;
 	}
 	GenericField *field;
+
 	String law(argv[1]);
 	String * splitted_law;
 	size_t size;
@@ -41,6 +42,7 @@ int main(int argc, char** argv) {
 		return ERROR;
 	}
 
+	bool result = field->match("src-ip=1.1.1.1");
 	parse_input(*field);
 	delete[] splitted_law;
 	delete field;
