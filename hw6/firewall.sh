@@ -14,17 +14,17 @@ non_space=$(echo "$non_hash" | sed '/^$/d')
 
 
 for row in $non_space; do
-  law1=$(echo $row | awk -F, '{print $1}')
-  law2=$(echo $row | awk -F, '{print $2}')
-  law3=$(echo $row | awk -F, '{print $3}')
-  law4=$(echo $row | awk -F, '{print $4}')
+  law1=$(echo $row | awk -F, '{print $1}' | sed '/^$/d')
+  law2=$(echo $row | awk -F, '{print $2}' | sed '/^$/d')
+  law3=$(echo $row | awk -F, '{print $3}' | sed '/^$/d')
+  law4=$(echo $row | awk -F, '{print $4}' | sed '/^$/d')
 
   #deliver packets to be filterd by firewall.exe
   echo "$packets" | ./firewall.exe "$law1"\
 	  | ./firewall.exe "$law2"\
 	  | ./firewall.exe "$law3"\
 	  | ./firewall.exe "$law4"\
-	  | sort | cat  
+	  | sort  
   #e02_filtered=$(echo "$packets" | ./firewall.exe "$law2")
   #aw3_filtered=$(echo "$packets" | ./firewall.exe "$law3")
   #aw4_filtered=$(echo "$packets" | ./firewall.exe "$law4")
