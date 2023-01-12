@@ -4,23 +4,22 @@ using namespace std;
 #include "port.h"
 #define CORRECT_SIZE 2
 
-Port::Port(string law) {
-	field = find_field(string law);
+Port::Port(String law) {
+	field = find_field(law);
 	port = 0;
 	upper_bound = 0;
 	lower_bound = 0;
 }
 
-port::~port(){}
+Port::~Port(){}
 
 
 String Port::find_field(String law) {
 
 	String* src_out;
 	size_t src_size;
-	String tmp_law
 	law.split("src-port", &src_out, &src_size);
-	if (src_out[0].trim().data[0] == '=') {
+	if (src_out[0].trim().equals("=")) {
 		delete[] src_out;
 		return String("src");
 	}
@@ -31,25 +30,25 @@ String Port::find_field(String law) {
 	}
 }
 
-bool Port::set_value(string range) {
+bool Port::set_value(String range) {
 	
-	string *splitted_range;
+	String *splitted_range;
 	size_t size;
 	//splitting range string "prt-prt"
-	range.split("-",&splitted_range, &size)
+	range.split("-",&splitted_range, &size);
 	if (size != CORRECT_SIZE) {
 		delete[] splitted_range;
 		return false;
 	}
 
-	lower_bound = splitted_rang[0].trim().to_integer();
-	upper_bound = splitted_rang[1].trim().to_integer();
+	lower_bound = splitted_range[0].trim().to_integer();
+	upper_bound = splitted_range[1].trim().to_integer();
 
 	delete[] splitted_range;
 	return true;
 }
 
-bool Port::match(string packet) {
+bool Port::match(String packet) {
 
 	/*extract port from the packet:*/
 	//1. divide to fields
@@ -70,7 +69,7 @@ bool Port::match(string packet) {
 		if (tmp_out[0].trim().equals(field)) {
 			//4.then the second sub-field is the port!
 			tmp_out[1] = tmp_out[1].trim();
-			port = tmp_out[1].to_intager;
+			port = tmp_out[1].to_integer();
 			delete[] tmp_out;
 			break;
 		}
