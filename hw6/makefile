@@ -6,14 +6,15 @@ EXEC=firewall.exe
 RM=rm -rf
 
 
-#linkaging main with firewall.exe
-$(EXEC): main.o
-	$(CXXLINK) main.o -o $(EXEC) -lfirewall -linput -L.
+all:  $(EXEC) libfirewall.so 
 
+#linkaging main with firewall.exe
+$(EXEC): main.o libfirewall.so
+	$(CXXLINK) main.o -o $(EXEC) -lfirewall -linput -L.
 
 #create our library of libfirewall
 libfirewall.so: $(OBJS) 
-	$(CXXLINK) -shared $(OBJS) -o libfirewall.so -L.  
+	$(CXXLINK) -shared $(OBJS) -o libfirewall.so -L. 	
 
 
 #contents of firewall(generic field.h is implictly used in ip.h, port.h
