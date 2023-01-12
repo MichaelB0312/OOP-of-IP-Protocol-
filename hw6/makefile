@@ -8,7 +8,7 @@ RM=rm -rf
 
 #linkaging main with firewall.exe
 $(EXEC): main.o
-	$(CXXLINK) main.o -lfirewall -linput -o $(EXEC) -L
+	$(CXXLINK) main.o -lfirewall -linput -o $(EXEC)
 
 
 #create our library of libfirewall
