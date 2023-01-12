@@ -9,8 +9,8 @@ RM=rm -rf
 all:  $(EXEC) libfirewall.so 
 
 #linkaging main with firewall.exe
-$(EXEC): main.o libfirewall.so
-	$(CXXLINK) main.o -o $(EXEC) -lfirewall -linput -L.
+$(EXEC): main.o
+	$(CXX) main.o -o $(EXEC) -lfirewall -linput -L.
 
 #create our library of libfirewall
 libfirewall.so: $(OBJS) 
