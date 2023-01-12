@@ -14,7 +14,8 @@ int main(){
 	//str = c;
 	String lawwww = "src-ip=96.48.24.8/8";
 	size_t size;
-	lawwww.split("=",NULL,&size);
+	String* equ_out;
+	lawwww.split("=",&equ_out,&size);
 	//const char* delimiters = ".";
 	//String *output;
 	//size_t size;
