@@ -22,6 +22,7 @@ String::String(const char* str) {
 }
 
 String::~String() {
+
 	delete[] data;
 }
 
@@ -76,8 +77,11 @@ bool String::equals(const char *rhs) const {
 
 void String::split(const char* delimiters, String** output, size_t* size) const {
   // Make a copy of the string and a copy of the delimiters
-  char *str = strdup(data);
-  char *delims = strdup(delimiters);
+  char *str = new char[length + 1];
+  strcpy(str,data);
+  char *delims = new char[strlen(delimiters) + 1];
+  strcpy(delims,data);
+ 
 
   // Initialize the output array and the size
   *size = 0;
@@ -106,13 +110,16 @@ void String::split(const char* delimiters, String** output, size_t* size) const 
 			// delete the old array and update new
 			delete[] * output;
 			*output = new String[*size + 1];
-			*output = new_output;
+			//*output = new_output;
+			for (size_t i = 0; i < *size; i++){
+				(*output)[i] = new_output[i];
+			}
 
 	}
 
 	if(output != NULL){
 		// Initialize the new token
-    		(*output)[*size] = token;
+    		(*output)[*size] = String(token);
 	}
     (*size)++;
 
@@ -121,8 +128,8 @@ void String::split(const char* delimiters, String** output, size_t* size) const 
   }
 
   // Free the copies of the string and delimiters
-  free(str);
-  free(delims);
+  delete[] str;
+  delete[] delims;
 }
 
 
