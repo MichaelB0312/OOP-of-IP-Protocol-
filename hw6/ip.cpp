@@ -82,15 +82,15 @@ bool IP::match(String packet) {
 				//3.extract ip from the field
 				ip_extern = equ_sep(out_fields[i]);
 				//4. find if this part is compatible to desired field 
-				if (ip_extern.equals(field)) {
+				if (!ip_extern.equals(" ")) {
 					break;
 				}
 			}
 		}
 		else {  // The case we get only single field in the packet(like in gdb-test)
 
-			ip_extern = equ_sep(packet);
-			if (!ip_extern.equals(field)) {
+			ip_extern = equ_sep(packet.trim();
+			if (ip_extern.equals(" ") {
 				return false; //miss-match between ip and law
 			}
 		}
