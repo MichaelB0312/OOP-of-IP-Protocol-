@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
 	}
 
 	bool result = field->match("dst-ip=3.0.0.0");
-	cout << result
+	cout << result;
 	//bool result = field->match("src-ip=1.1.1.1");
 	//cout << result;
 
