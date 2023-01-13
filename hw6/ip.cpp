@@ -64,6 +64,11 @@ bool IP::set_value(String value) {
 
 bool IP::match(String packet) {
 
+	//check if packet isn't empty
+	if (packet.equals("")) {
+		return false;
+	}
+
 	/*extract the IP from the packet according to field:*/
 	String ip_extern;
 
