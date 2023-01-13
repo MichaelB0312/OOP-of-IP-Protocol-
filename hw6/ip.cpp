@@ -7,11 +7,11 @@ using namespace std;
 
 IP::IP(String law) {
 	
-	law = law.trim();
+	this->law = law.trim();
 	//find type of field from the law
-	field = find_field(law);
+	this->field = find_field(law);
 	//zero initiating. we'll find the accurate ip in set_value
-	ip_law = "0.0.0.0";
+	this->ip_law = "0.0.0.0";
 
 }
 
