@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
 		return ERROR;
 	}
 
-	bool result = field->match("src-ip=1.1.1.1");
+	bool result = field->match("src-ip=3.0.0.0");
 	cout << result;
 	parse_input(*field);
 	delete[] splitted_law;
