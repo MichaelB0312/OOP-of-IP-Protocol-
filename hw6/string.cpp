@@ -80,7 +80,7 @@ void String::split(const char* delimiters, String** output, size_t* size) const 
   char *str = new char[length + 1];
   strcpy(str,data);
   char *delims = new char[strlen(delimiters) + 1];
-  strcpy(delims,data);
+  strcpy(delims,delimiters);
  
 
   // Initialize the output array and the size
@@ -91,35 +91,38 @@ void String::split(const char* delimiters, String** output, size_t* size) const 
   char *token = strtok(str, delims);
   while (token != NULL) {
 
-    if(this->equals(token)){
+
+   	if(this->equals(token)){
+		*output = NULL;
 		break;
-    }
+    	}
 
     // Allocate memory for the new token
-    if (*size == 0 && output != NULL) {
-      *output = new String[1];
-	}
+   	if (*size == 0 && output != NULL) {
+     		*output = new String[1];
+    	}
 	else if(output != NULL) {
-			String* new_output = new String[*size + 1];
+		String* new_output = new String[*size + 1];
 
-			// reallocating:
-			for (size_t i = 0; i < *size; i++) {
-				new_output[i] = (*output)[i];
-			}
+		// reallocating:
+		for (size_t i = 0; i < *size; i++) {
+			new_output[i] = (*output)[i];
+		}
 
-			// delete the old array and update new
-			delete[] * output;
-			*output = new String[*size + 1];
-			//*output = new_output;
-			for (size_t i = 0; i < *size; i++){
-				(*output)[i] = new_output[i];
-			}
+		// delete the old array and update new
+		delete[] * output;
+		*output = new String[*size + 1];
+		//*output = new_output;
+		for (size_t i = 0; i < *size; i++){
+			(*output)[i] = new_output[i];
+		}
+		delete[] new_output;
 
 	}
 
 	if(output != NULL){
 		// Initialize the new token
-    		(*output)[*size] = String(token);
+    		(*output)[*size] = token;
 	}
     (*size)++;
 
