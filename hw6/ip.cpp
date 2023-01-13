@@ -78,8 +78,6 @@ bool IP::match(String packet) {
 			for (size_t i = 0; i < size_fields; i++) {
 
 				out_fields[i] = out_fields[i].trim();
-				String* tmp_out;
-				size_t tmp_size;
 
 				//3.extract ip from the field
 				ip_extern = equ_sep(out_fields[i]);
