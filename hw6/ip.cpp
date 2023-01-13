@@ -89,8 +89,8 @@ bool IP::match(String packet) {
 		}
 		else {  // The case we get only single field in the packet(like in gdb-test)
 
-			ip_extern = equ_sep(packet.trim();
-			if (ip_extern.equals(" ") {
+			ip_extern = equ_sep(packet.trim());
+			if (ip_extern.equals(" ")) {
 				return false; //miss-match between ip and law
 			}
 		}
