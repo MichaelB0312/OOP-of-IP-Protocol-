@@ -44,6 +44,12 @@ public:
 	*/
 	unsigned int get_mask(String law);
 
+
+	/**
+	* @brief get the IP from a single field by split this field in '='
+	*/
+	String equ_sep(String single_field);
+
 };
 
 
