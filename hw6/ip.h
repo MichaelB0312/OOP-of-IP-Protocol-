@@ -46,7 +46,7 @@ public:
 
 
 	/**
-	* @brief get the IP from a single field by split this field in '='
+	* @brief Get the IP from a single field by split this field in '='
 	*/
 	String equ_sep(String single_field);
 

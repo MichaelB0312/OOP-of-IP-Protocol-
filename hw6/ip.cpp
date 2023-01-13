@@ -19,15 +19,15 @@ String IP::find_field(String law) {
 
 	String* src_out;
 	size_t src_size;
-	law.split("src-ip", &src_out, &src_size);
-	if (src_out[0].trim().equals("=")) {
+	law.split("=", &src_out, &src_size);
+	if (src_out[0].trim().equals("src-ip")) {
 		delete[] src_out;
-		return String("src");
+		return String("src-ip");
 	}
 	else
 	{	
 		delete[] src_out;
-		return String("dst");
+		return String("dst-ip");
 	}
 }
 
