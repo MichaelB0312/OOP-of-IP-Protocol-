@@ -18,8 +18,8 @@ String Port::find_field(String law) {
 
 	String* src_out;
 	size_t src_size;
-	law.split("src-port", &src_out, &src_size);
-	if (src_out[0].trim().equals("=")) {
+	law.split("=", &src_out, &src_size);
+	if (src_out[0].trim().equals("src-port")) {
 		delete[] src_out;
 		return String("src-port");
 	}
