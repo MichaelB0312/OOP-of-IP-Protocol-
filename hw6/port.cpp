@@ -58,23 +58,23 @@ bool Port::match(String packet) {
 	tmp_packet.split(",", &out_fields, &size_fields);
 	
 	if (size_fields != 0) { //i.e. we have more than one field
-	//2. divide each field according to '='
-	for (size_t i = 0; i < size_fields; i++) {
 
-		out_fields[i] = out_fields[i].trim();
-		String* tmp_out;
-		size_t tmp_size;
-		out_fields[i].split("=", &tmp_out, &tmp_size);
+			//2. divide each field according to '='
+		for (size_t i = 0; i < size_fields; i++) {
 
-		//3.identify the corret port according to field
-		if (tmp_out[0].trim().equals(field)) {
-			//4.then the second sub-field is the port!
-			tmp_out[1] = tmp_out[1].trim();
-			port = tmp_out[1].to_integer();
-			delete[] tmp_out;
-			break;
+			out_fields[i] = out_fields[i].trim();
+
+			//3.extract port from the field
+			port = equ_sep(out_fields[i]);
+			//4. find if this part is compatible to desired field 
+			if (port!=0) {
+				break;
+			}
 		}
-		delete[] tmp_out;
+	}
+	else {  // The case we get only single field in the packet(like in gdb-test)
+
+		port = equ_sep(packet.trim());
 	}
 
 	delete[] out_fields;
