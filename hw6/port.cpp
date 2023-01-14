@@ -56,7 +56,8 @@ bool Port::match(String packet) {
 	size_t size_fields;
 	String tmp_packet = packet.trim();
 	tmp_packet.split(",", &out_fields, &size_fields);
-
+	
+	if (size_fields != 0) { //i.e. we have more than one field
 	//2. divide each field according to '='
 	for (size_t i = 0; i < size_fields; i++) {
 
@@ -83,5 +84,26 @@ bool Port::match(String packet) {
 		return false;
 	}
 	return true;
+}
+
+
+int Port::equ_sep(String single_field) {
+	String* single_out;
+	size_t single_size;
+	int port_extern;
+	single_field.split("=", &single_out, &single_size);
+	//field is left to "="
+	if (single_out[0].trim().equals(field)) {
+		//then the second sub-field is the port!
+		single_out[1] = single_out[1].trim();
+		port_extern = single_out[1].to_integer();
+		delete[] single_out;
+	}
+	else
+	{
+		port_extern = 0;
+	}
+
+	return port_extern;
 }
 

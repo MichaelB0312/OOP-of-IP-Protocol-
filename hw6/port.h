@@ -20,6 +20,9 @@ public:
 	String find_field(String law); //find the required field dst or src
 	bool set_value(String range); // set the legal values of the range
 	bool match(String packet); // checks if the correct field matches the given law
-
+	/**
+	* @brief Get the port from a single field by split this field in '='
+	*/
+	int equ_sep(String single_field);
 };
 #endif
