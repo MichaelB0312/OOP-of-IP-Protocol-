@@ -50,6 +50,11 @@ bool Port::set_value(String range) {
 
 bool Port::match(String packet) {
 
+	//check if packet isn't empty
+	if (packet.equals("")) {
+		return false;
+	}
+
 	/*extract port from the packet:*/
 	//1. divide to fields
 	String* out_fields;
