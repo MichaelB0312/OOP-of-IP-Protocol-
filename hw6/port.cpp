@@ -21,12 +21,12 @@ String Port::find_field(String law) {
 	law.split("src-port", &src_out, &src_size);
 	if (src_out[0].trim().equals("=")) {
 		delete[] src_out;
-		return String("src");
+		return String("src-port");
 	}
 	else
 	{
 		delete[] src_out;
-		return String("dst");
+		return String("dst-port");
 	}
 }
 
